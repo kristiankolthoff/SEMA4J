@@ -32,6 +32,7 @@ import java.util.Objects;
  * 	<li><code>Theme</code>(name): the letter(content)</li>
  *  <li><code>Goal</code>(name): to the university(content)</li>
  * </ul>
+ * @author Kristian Kolthoff
  */
 public class FElement implements Comparable<FElement>{
 

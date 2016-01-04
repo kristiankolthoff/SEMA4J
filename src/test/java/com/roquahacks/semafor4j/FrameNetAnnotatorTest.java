@@ -22,15 +22,16 @@ public class FrameNetAnnotatorTest {
 	
 	@Before
 	public void init() throws FileNotFoundException, ParserConfigurationException {
-		this.fnAnno = FrameNetAnnotator.getInstance();
+		final String javaHomePath = "/usr/lib/jvm/java-8-oracle/bin";
+		this.fnAnno = new FrameNetAnnotator(javaHomePath);
 	}
 	
 	@Test
 	public void annotateStringTest() {
 		final String studentTest = "The student sends the letter to the university";
-		this.fnAnno.annotate(studentTest);
+		this.fnAnno.addToCache(studentTest);
 		try {
-			HashMap<String, List<Frame>> frameMap = fnAnno.fetchFNResults();
+			HashMap<String, List<Frame>> frameMap = fnAnno.fetchFNResultsFromCache();
 			System.out.println();
 			assertEquals(1, frameMap.size());
 			List<Frame> frames = frameMap.get(studentTest);

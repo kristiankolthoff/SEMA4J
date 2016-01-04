@@ -30,30 +30,24 @@ import org.apache.commons.io.FileUtils;
 /**
  * <code>FrameNetService</code> provides utilities for the creation and extraction of
  * semantic FrameNet annotations.
+ * @author Kristian Kolthoff
  */
 public class FrameNetService {
 
 	private FrameNetOptions fnOpt;
 	private List<String> configFile;
 	
-	public static final String SEMAFOR_HOME = "SEMAFOR_HOME=";
-	public static final String MST_MODE = "MST_MODE=";
-	public static final String JAVA_HOME = "JAVA_HOME=";
-	public static final String GOLD_TARGET_FILE = "GOLD_TARGET_FILE=";
-	public static final String AUTO_TARGET_ID_MODE = "AUTO_TARGET_ID_MODE=";
-	public static final String USE_GRAPH_FILES = "USE_GRAPH_FILE=";
-	public static final String DECODING_TYPE = "DECODING_TYPE=";
-	
-	public FrameNetService() throws FileNotFoundException {
-		this.fnOpt = FrameNetOptions.getStandardOpt();
-		this.configFile = new ArrayList<String>();
-		if(this.fnOpt.isServerModeOn()) {
-			startServer();
-		}
-	}
+	private static final String SEMAFOR_HOME = "SEMAFOR_HOME=";
+	private static final String MST_MODE = "MST_MODE=";
+	private static final String JAVA_HOME = "JAVA_HOME=";
+	private static final String GOLD_TARGET_FILE = "GOLD_TARGET_FILE=";
+	private static final String AUTO_TARGET_ID_MODE = "AUTO_TARGET_ID_MODE=";
+	private static final String USE_GRAPH_FILES = "USE_GRAPH_FILE=";
+	private static final String DECODING_TYPE = "DECODING_TYPE=";
 	
 	public FrameNetService(FrameNetOptions fnOpt) {
 		this.fnOpt = fnOpt;
+		this.configFile = new ArrayList<String>();
 		if(this.fnOpt.isServerModeOn()) {
 			startServer();
 		}
@@ -132,15 +126,11 @@ public class FrameNetService {
 	
 	public static void main(String[] args) {
 		FrameNetService fnService;
-		try {
-			fnService = new FrameNetService();
-			List<String> list = new ArrayList<String>();
-			list.add("The student sends his cv to the university");
-			list.add("Invite to aptitude test");
-			fnService.createAnnotationFile(list);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		fnService = new FrameNetService(FrameNetOptions.getStandardOpt(""));
+		List<String> list = new ArrayList<String>();
+		list.add("The student sends his cv to the university");
+		list.add("Invite to aptitude test");
+		fnService.createAnnotationFile(list);
 	}
 	
 	public void createAnnotationFile(List<String> sentences) {

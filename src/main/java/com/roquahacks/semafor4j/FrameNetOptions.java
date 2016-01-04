@@ -19,8 +19,11 @@
 package com.roquahacks.semafor4j;
 
 import java.io.File;
+
+import com.roquahacks.semafor4j.exceptions.UnsupportedDecodingTypeException;
 /**
  * Options object, representing all configuration components for the semantic parser SEMAFOR.
+ * @author Kristian Kolthoff
  */
 public class FrameNetOptions {
 
@@ -41,19 +44,40 @@ public class FrameNetOptions {
 	public static final String ABS_PATH_FILE_CONFIG = ABS_PATH_SEMAFOR + "release/config";
 	public static final String ABS_PATH_DIR_TEMP = ABS_PATH_SEMAFOR + "temp/";
 	
-	public FrameNetOptions(String goldTargetsPath) {
+	public FrameNetOptions(String goldTargetsPath, String javaHomePath) {
 		this.goldTargetsPath = goldTargetsPath;
+		this.javaHomePath = javaHomePath;
 	}
 	
-	public static FrameNetOptions getStandardOpt() {
-		//TODO: find out correct path of java installation
-		final String JAVA_HOME_PATH = "/usr/lib/jvm/java-8-oracle/bin";
-		FrameNetOptions fnOpt = new FrameNetOptions("null")
-				.setServerModeOn(true)
-				.setAutoTargetIDStrictModeOn(true)
-				.setGraphFilesOn(true)
-				.setDecodingType(DECODING_TYPE_AD3)
-				.setJavaHomePath(JAVA_HOME_PATH);
+	public FrameNetOptions(boolean serverModeOn, boolean autoTargetIDStrictModeOn, boolean graphFilesOn,
+			String decodingType, String goldTargetsPath, String javaHomePath) throws UnsupportedDecodingTypeException {
+		super();
+		if(!this.isDecodingTypeValid(decodingType)) {
+			throw new UnsupportedDecodingTypeException(decodingType);
+		}
+		this.serverModeOn = serverModeOn;
+		this.autoTargetIDStrictModeOn = autoTargetIDStrictModeOn;
+		this.graphFilesOn = graphFilesOn;
+		this.decodingType = decodingType;
+		this.goldTargetsPath = goldTargetsPath;
+		this.javaHomePath = javaHomePath;
+	}
+
+	/**
+	 * Standard options for SEMAFOR
+	 * @return the standard settings for the semantic parser
+	 */
+	public static FrameNetOptions getStandardOpt(String javaHomePath) {
+		FrameNetOptions fnOpt = null;
+		try {
+			fnOpt = new FrameNetOptions("null",javaHomePath)
+					.setServerModeOn(true)
+					.setAutoTargetIDStrictModeOn(true)
+					.setGraphFilesOn(true)
+					.setDecodingType(DECODING_TYPE_AD3);
+		} catch (UnsupportedDecodingTypeException e) {
+			e.printStackTrace();
+		}
 		return fnOpt;
 	}
 
@@ -88,9 +112,13 @@ public class FrameNetOptions {
 		return decodingType;
 	}
 
-	public FrameNetOptions setDecodingType(String decodingType) {
-		this.decodingType = decodingType;
-		return this;
+	public FrameNetOptions setDecodingType(String decodingType) throws UnsupportedDecodingTypeException {
+		if(this.isDecodingTypeValid(decodingType)) {
+			this.decodingType = decodingType;
+			return this;			
+		} else {
+			throw new UnsupportedDecodingTypeException(decodingType);
+		}
 	}
 
 	public String getGoldTargetsPath() {
@@ -109,6 +137,11 @@ public class FrameNetOptions {
 	public FrameNetOptions setJavaHomePath(String javaHomePath) {
 		this.javaHomePath = javaHomePath;
 		return this;
+	}
+	
+	private boolean isDecodingTypeValid(String decodingType) {
+		return decodingType.equals(DECODING_TYPE_AD3) ||
+				decodingType.equals(DECODING_TYPE_BEAM);
 	}
 
 }

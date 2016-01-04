@@ -3,7 +3,6 @@ package com.roquahacks.semafor4j;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +17,10 @@ public class FrameNetServiceTest {
 	
 	@Before
 	public void init() {
-		try {
-			this.fnService = new FrameNetService();
-			this.sentences = new ArrayList<String>();
-			this.sentences.add("Send invitation to the student");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		final String javaHomePath = "/usr/lib/jvm/java-8-oracle/bin";
+		this.fnService = new FrameNetService(FrameNetOptions.getStandardOpt(javaHomePath));
+		this.sentences = new ArrayList<String>();
+		this.sentences.add("Send invitation to the student");
 	}
 	
 	@Test

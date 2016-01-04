@@ -28,6 +28,7 @@ import java.util.Objects;
  * the <code>target</code> which is the part of the sentence that actually invoked the <code>
  * Frame</code>, a <code>rank<code> that expresses how many other <code>Frame</code>s are higher
  * weighted than this frame for the sentence and a list of <code>FElement</code>s.
+ * @author Kristian Kolthoff
  */
 public class Frame implements Comparable<Frame>, Iterable<FElement>{
 
