@@ -15,10 +15,10 @@ public class FrameNetOptions {
 	
 	public static final String DECODING_TYPE_AD3 = "ad3";
 	public static final String DECODING_TYPE_BEAM = "beam";
-	public static final String FN_FILE_NAME = "mambaPM";
+	public static final String FN_FILE_NAME = "frames";
 	public static final String FN_FILE_OUT_NAME = FN_FILE_NAME + ".out";
-	public static final String ABS_PATH_SEMAFOR = new File(".").getAbsolutePath() + "/src/resources/framenet-semantic-parsing/semafor/";
-	public static final String ABS_PATH_FNDATA = new File(".").getAbsolutePath() + "/src/resources/framenet-semantic-parsing/frame-data/";
+	public static final String ABS_PATH_SEMAFOR = new File(".").getAbsolutePath() + "/src/main/resources/framenet-semantic-parsing/semafor/";
+	public static final String ABS_PATH_FNDATA = new File(".").getAbsolutePath() + "/src/main/resources/framenet-semantic-parsing/frame-data/";
 	public static final String ABS_PATH_DRIVER_SCRIPT = ABS_PATH_SEMAFOR + "release/fnParserDriver.sh";
 	public static final String ABS_PATH_FILE_CONFIG = ABS_PATH_SEMAFOR + "release/config";
 	public static final String ABS_PATH_DIR_TEMP = ABS_PATH_SEMAFOR + "temp/";
