@@ -17,10 +17,23 @@
  * limitations under the License.
  */
 package com.roquahacks.semafor4j.model;
+
+import java.util.Objects;
+
 /**
  * <code>FElement</code> represents a frame element of a <code>Frame</code>.
+ * Each <code>FElement</code> consists of an identifying name and an identifying
+ * ID. Additionally, the frame element has a content field. For example, the 
+ * <code>Sending</code> frame invoked by the sentence,
+ * <p>"The student sends the letter to the university"</p>
+ * <p>contains three frame elements, that is:</p>
+ * <ul>
+ * 	<li><code>Sender</code>(name): The student(content)</li>
+ * 	<li><code>Theme</code>(name): the letter(content)</li>
+ *  <li><code>Goal</code>(name): to the university(content)</li>
+ * </ul>
  */
-public class FElement {
+public class FElement implements Comparable<FElement>{
 
 	private String name;
 	private String content;
@@ -51,4 +64,59 @@ public class FElement {
 		this.id = id;
 	}
 
+	@Override
+	public int hashCode() {
+		int hash = 5;
+		hash = 31 * hash + Objects.hash(this.name);
+		hash = 31 * hash + Objects.hash(this.content);
+		hash = 31 * hash + Objects.hash(this.id);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == this) {
+			return true;
+		}
+		if(!(obj instanceof FElement)) {
+			return false;
+		}
+		FElement that = (FElement) obj;
+		return this.name.equals(that.name) &&
+			   this.id == that.id &&
+			   this.content == that.content;
+	}
+	
+	/**
+	 * Compares two <code>FElement</code>s in a way more
+	 * less strict mode than the <code>equals</code> method.
+	 * For equality, it compares only the frame element identifying 
+	 * fields name and id and does not consider the content.
+	 * @param obj the reference object with which to compare
+	 * @return <code>true</code>, if identifiers of the two
+	 * <code>FElement</code>s are equal, <code>false</code>
+	 * otherwise
+	 */
+	public boolean equalsLessStrict(Object obj) {
+		if(obj == this) {
+			return true;
+		}
+		if(!(obj instanceof FElement)) {
+			return false;
+		}
+		FElement that = (FElement) obj;
+		return this.name.equals(that.name) &&
+				this.id == that.id;
+	}
+
+	@Override
+	public String toString() {
+		return "FElement : [" + this.id + ", " + 
+				this.name + ", " + this.content + "]";
+	}
+
+	public int compareTo(FElement that) {
+		return this.name.compareTo(that.name);
+	}
+	
 }
