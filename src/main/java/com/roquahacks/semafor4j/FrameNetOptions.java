@@ -1,3 +1,21 @@
+/**
+ * 
+ * SEMAFOR4J
+ * 
+ * Copyright (C) 2015 Kristian Kolthoff
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.roquahacks.semafor4j;
 
 import java.io.File;
@@ -17,8 +35,8 @@ public class FrameNetOptions {
 	public static final String DECODING_TYPE_BEAM = "beam";
 	public static final String FN_FILE_NAME = "frames";
 	public static final String FN_FILE_OUT_NAME = FN_FILE_NAME + ".out";
-	public static final String ABS_PATH_SEMAFOR = new File(".").getAbsolutePath() + "/src/main/resources/framenet-semantic-parsing/semafor/";
-	public static final String ABS_PATH_FNDATA = new File(".").getAbsolutePath() + "/src/main/resources/framenet-semantic-parsing/frame-data/";
+	public static final String ABS_PATH_SEMAFOR = new File(".").getAbsolutePath() + "/src/main/resources/semafor/";
+	public static final String ABS_PATH_FNDATA = new File(".").getAbsolutePath() + "/src/main/resources/frame-data/";
 	public static final String ABS_PATH_DRIVER_SCRIPT = ABS_PATH_SEMAFOR + "release/fnParserDriver.sh";
 	public static final String ABS_PATH_FILE_CONFIG = ABS_PATH_SEMAFOR + "release/config";
 	public static final String ABS_PATH_DIR_TEMP = ABS_PATH_SEMAFOR + "temp/";

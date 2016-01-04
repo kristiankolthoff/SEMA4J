@@ -26,12 +26,15 @@ public class FrameNetAnnotatorTest {
 	}
 	
 	@Test
-	public void annotateActivityTest() {
-		this.fnAnno.annotate("The student sends the letter to the university.");
+	public void annotateStringTest() {
+		final String studentTest = "The student sends the letter to the university";
+		this.fnAnno.annotate(studentTest);
 		try {
 			HashMap<String, List<Frame>> frameMap = fnAnno.fetchFNResults();
+			System.out.println();
 			assertEquals(1, frameMap.size());
-			List<Frame> frames = frameMap.get("The student sends the letter to the university.");
+			List<Frame> frames = frameMap.get(studentTest);
+			System.out.println(frames);
 			assertEquals(4, frames.size());
 			assertEquals("Education_teaching", frames.get(0).getName());
 			assertEquals("Sending", frames.get(1).getName());
@@ -46,20 +49,5 @@ public class FrameNetAnnotatorTest {
 		}
 		
 	}
-	
-	@Test
-	public void annotateModelTest() {
-		fnAnno.annotate("");
-		try {
-			HashMap<String, List<Frame>> frameMap = fnAnno.fetchFNResults();
-			List<Frame> frames = frameMap.get("Send letter of acceptance");
-			assertEquals("Sending", frames.get(2).getName());
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
 }
