@@ -27,11 +27,42 @@ public class FrameNetAnnotatorTest {
 	}
 	
 	@Test
-	public void annotateStringTest() {
+	public void addToCacheTest() {
+		final String sentence= "This is a test string";
+		this.fnAnno.addToCache(sentence);
+		assertTrue(this.fnAnno.isCached(sentence));
+	}
+	
+	@Test
+	public void annotateCachedStringTest() {
 		final String studentTest = "The student sends the letter to the university";
 		this.fnAnno.addToCache(studentTest);
 		try {
 			HashMap<String, List<Frame>> frameMap = fnAnno.fetchFNResultsFromCache();
+			System.out.println();
+			assertEquals(1, frameMap.size());
+			List<Frame> frames = frameMap.get(studentTest);
+			System.out.println(frames);
+			assertEquals(4, frames.size());
+			assertEquals("Education_teaching", frames.get(0).getName());
+			assertEquals("Sending", frames.get(1).getName());
+			assertEquals("Text", frames.get(2).getName());
+			assertEquals("Locale_by_use", frames.get(3).getName());
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Test
+	public void annotateStringTest() {
+		final String studentTest = "The student sends the letter to the university";
+		try {
+			HashMap<String, List<Frame>> frameMap = fnAnno.fetchFNResults(studentTest);
 			System.out.println();
 			assertEquals(1, frameMap.size());
 			List<Frame> frames = frameMap.get(studentTest);
