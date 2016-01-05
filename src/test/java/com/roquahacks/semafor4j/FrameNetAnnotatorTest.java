@@ -26,6 +26,7 @@ public class FrameNetAnnotatorTest {
 		this.fnAnno = new FrameNetAnnotator(javaHomePath);
 	}
 	
+	
 	@Test
 	public void addToCacheTest() {
 		final String sentence= "This is a test string";
