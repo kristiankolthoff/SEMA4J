@@ -27,6 +27,15 @@ sentences.add("Receive acknowledgement from the university")
 fnAnno.addToCache(sentence);
 fnAnno.addToCache(sentences);
 //Get annotation results
-HashMap<String, List<Frame>> frameAnnos = fnAnno.fetchFNResults(sentence);
+HashMap<String, List<Frame>> frameAnnos = fnAnno.fetchFNResultsFromCache(sentence);
 List<Frame> frames = frameAnnos.get(sentence);
+```
+Now you can access all properties of a frame and also iterate through the frame elements.
+
+```java
+Frame frame = frames.get(0);
+//Do something with the frame
+for(FElement felement : frame.iterator()) {
+  //Do something with frame element
+}
 ```
