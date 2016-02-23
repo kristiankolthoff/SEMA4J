@@ -16,26 +16,30 @@ FrameNetOptions fnOpts = new FrameNetOptions(true, true, false, FrameNetOptions.
 FrameNetAnnotator fnAnno = new FrameNetAnnotator(fnOpts);
 ```
 Once you have created the annotator, you can start with the semantic parsing of strings.
+This can be achieved, by simply calling the corresponding fetchFNResult methods as
+shown below. This method returns a list with all frames invoked by the assigned string.
+Afterwards you can access all properties of a frame and also iterate through the frame elements.
+
+```java
+List<Frame> frames = fnAnno.fetchFNResult("Send you application to the university");
+for(Frame frame : frames) {
+//Do something with the frame
+  for(FElement felement : frame.iterator()) {
+    //Do something with frame element
+  }
+}
+```
 Often you want to collect multiple sentences to be annotated at once. Simply add them to
 the cache. From the reults map, you can easily access to Frame list for each annotated string.
+
 ```java
-String sentence = "The students sends the letter to the university.";
 List<String> sentences = new ArrayList<>();
 sentences.add("Wait for the results");
 sentences.add("Receive acknowledgement from the university")
 //Add to cache
-fnAnno.addToCache(sentence);
 fnAnno.addToCache(sentences);
 //Get annotation results
 HashMap<String, List<Frame>> frameAnnos = fnAnno.fetchFNResultsFromCache(sentence);
-List<Frame> frames = frameAnnos.get(sentence);
-```
-Now you can access all properties of a frame and also iterate through the frame elements.
-
-```java
-Frame frame = frames.get(0);
-//Do something with the frame
-for(FElement felement : frame.iterator()) {
-  //Do something with frame element
-}
+//Access frames for "Wait for the results"
+List<Frame> frames = frameAnnos.get(sentences.get(0));
 ```
