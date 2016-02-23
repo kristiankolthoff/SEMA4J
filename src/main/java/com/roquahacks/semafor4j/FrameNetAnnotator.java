@@ -96,6 +96,38 @@ public class FrameNetAnnotator {
 	}
 	
 	/**
+	 * Fetches the annotations from the given
+	 * string with its corresponding 
+	 * invoked <code>Frame</code>s.
+	 * @param sentence
+	 * @return
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
+	public List<Frame> fetchFNResult(String sentence) throws ParserConfigurationException, 
+			SAXException, IOException {
+		this.sentences.add(sentence);
+		return this.fetchFNResultsFromCache().get(sentence);
+	}
+	
+	/**
+	 * Fetches the annotations from the given objects
+	 * string representation with its corresponding 
+	 * invoked <code>Frame</code>s.
+	 * @param obj
+	 * @return
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws IOException
+	 */
+	public List<Frame> fetchFNResult(Object obj) throws ParserConfigurationException, 
+			SAXException, IOException {
+		this.sentences.add(obj.toString());
+		return this.fetchFNResultsFromCache().get(obj.toString());
+	}
+	
+	/**
 	 * Fetches the annotations from the given sentences <code>Collection</code>
 	 * with their corresponding invoked <code>Frame</code>s.
 	 * @param sentences to be annotated
