@@ -30,7 +30,7 @@ for(Frame frame : frames) {
 }
 ```
 Often you want to collect multiple sentences to be annotated at once. Simply add them to
-the cache. From the reults map, you can easily access to Frame list for each annotated string.
+the cache. From the results map, you can easily access to Frame list for each annotated string.
 
 ```java
 List<String> sentences = new ArrayList<>();
