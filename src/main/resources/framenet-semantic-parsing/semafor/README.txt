@@ -1,1 +1,0 @@
-Add the files from SEMAFOR semantic parser here.
