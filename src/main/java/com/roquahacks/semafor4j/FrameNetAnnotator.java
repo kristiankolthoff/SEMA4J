@@ -22,8 +22,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -136,7 +136,7 @@ public class FrameNetAnnotator {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public HashMap<String, List<Frame>> fetchFNResults(Collection<String> sentences) 
+	public Map<String, List<Frame>> fetchFNResults(Collection<String> sentences) 
 			throws ParserConfigurationException, SAXException, IOException {
 		this.sentences.addAll(sentences);
 		return this.fetchFNResultsFromCache();
@@ -151,7 +151,7 @@ public class FrameNetAnnotator {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public HashMap<String, List<Frame>> fetchFNResults(String sentence) 
+	public Map<String, List<Frame>> fetchFNResults(String sentence) 
 			throws ParserConfigurationException, SAXException, IOException {
 		this.sentences.add(sentence);
 		return this.fetchFNResultsFromCache();
@@ -168,7 +168,7 @@ public class FrameNetAnnotator {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public HashMap<String, List<Frame>> fetchFNResults(Object obj) 
+	public Map<String, List<Frame>> fetchFNResults(Object obj) 
 			throws ParserConfigurationException, SAXException, IOException {
 		this.sentences.add(obj.toString());
 		return this.fetchFNResultsFromCache();
@@ -183,11 +183,11 @@ public class FrameNetAnnotator {
 	 * @throws SAXException
 	 * @throws IOException
 	 */
-	public HashMap<String, List<Frame>> fetchFNResultsFromCache() throws ParserConfigurationException, 
+	public Map<String, List<Frame>> fetchFNResultsFromCache() throws ParserConfigurationException, 
 			SAXException, IOException {
 		this.fnService.createAnnotationFile(sentences);
 		this.fnService.runFNSemanticParsing();
-		HashMap<String, List<Frame>> frameMap = fnParser.fetchFNData(FrameNetOptions.ABS_PATH_FNDATA + 
+		Map<String, List<Frame>> frameMap = fnParser.fetchFNData(FrameNetOptions.ABS_PATH_FNDATA + 
 				FrameNetOptions.FN_FILE_OUT_NAME);
 		this.fnService.cleanAll();
 		this.sentences.clear();

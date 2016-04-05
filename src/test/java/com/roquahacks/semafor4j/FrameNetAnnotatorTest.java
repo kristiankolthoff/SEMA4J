@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -39,7 +39,7 @@ public class FrameNetAnnotatorTest {
 		final String studentTest = "The student sends the letter to the university";
 		this.fnAnno.addToCache(studentTest);
 		try {
-			HashMap<String, List<Frame>> frameMap = fnAnno.fetchFNResultsFromCache();
+			Map<String, List<Frame>> frameMap = fnAnno.fetchFNResultsFromCache();
 			System.out.println();
 			assertEquals(1, frameMap.size());
 			List<Frame> frames = frameMap.get(studentTest);
@@ -63,7 +63,7 @@ public class FrameNetAnnotatorTest {
 	public void annotateStringTest() {
 		final String studentTest = "The student sends the letter to the university";
 		try {
-			HashMap<String, List<Frame>> frameMap = fnAnno.fetchFNResults(studentTest);
+			Map<String, List<Frame>> frameMap = fnAnno.fetchFNResults(studentTest);
 			System.out.println();
 			assertEquals(1, frameMap.size());
 			List<Frame> frames = frameMap.get(studentTest);
