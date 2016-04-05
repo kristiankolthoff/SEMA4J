@@ -44,7 +44,7 @@ sentences.add("Receive acknowledgement from the university")
 //Add to cache
 fnAnno.addToCache(sentences);
 //Get annotation results
-HashMap<String, List<Frame>> frameAnnos = fnAnno.fetchFNResultsFromCache(sentence);
+Map<String, List<Frame>> frameAnnos = fnAnno.fetchFNResultsFromCache(sentence);
 //Access frames for "Wait for the results"
 List<Frame> frames = frameAnnos.get(sentences.get(0));
 ```
