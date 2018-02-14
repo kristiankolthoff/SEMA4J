@@ -3,12 +3,13 @@ SEMA4J is a Java wrapper for easily accessing FrameNet semantic parsing by the [
 designed as a command line tool, this wrapper gives you easy programmatic access to FrameNet semantic parsing. It is also
 very easy to configure and get started with, let's check it out.
 
-#Installation
+# Installation
 In order to be able to execute SEMA4J, you additionally need to add the original files of SEMAFOR to SEMA4J to the resources folder. The files you need to add can be found on the corresponding GitHub repository ([SEMAFOR Semantic Parser](https://github.com/Noahs-ARK/semafor-semantic-parser)). Just download the repository there, and include to the orignal repository file structure, the stackedParserServer and models folders to the root. A more detailed description of that can be found on their GitHub repository. Finally, add these files to this program under main/resources/semafor. SEMA4J will call this implementation of semantic parsing and return the results programatically. Make sure to start the server in order to fasten up the annotation process later.
 
 Note that the SEMAFOR tool seems to work only with a linux system currently. All tests were done with Ubuntu.
 
-#Example
+# Example
+
 First of all, create a FrameNetAnnotator instance by specifying your JAVA_HOME installation path.
 ```java
 FrameNetAnnotator fnAnno = new FrameNetAnnotator(javaHomePath);
